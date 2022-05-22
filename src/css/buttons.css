@@ -1,0 +1,28 @@
+.button-wrap {
+    display: flex;
+    justify-content: center;
+}
+.button-wrap > .button {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+.button-wrap > .button:first-child {
+    margin-left: 0;
+}
+.button-normal {
+    color: #333;
+    border: 1px solid #ddd;
+    background-color: #fff;
+}
+.button-ok {
+    color: #fff;
+    border: 1px solid #5775ca;
+    background-color: #5775ca;
+    text-align: center;
+}
