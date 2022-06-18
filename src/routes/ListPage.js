@@ -2,42 +2,25 @@ import * as React from 'react';
 import {Link} from 'react-router-dom';
 
 function ListPage() {
-    //   const [content, setContent] = useState("");
-    //   const onChange = (event) => setContent(event.target.value);
-    //   const onSubmit = (event) => {
-    //     event.preventDefault();
-    //   }
+    const contentArray =  window.localStorage.getItem("contentArray");
+    const parsedData = JSON.parse(contentArray);
+    console.log(parsedData);
       return (
         <div className="list-page">
           <div className='sub-inner'>
             <h2 className='sub-title'>리스트 페이지</h2>
             <form>
-              <div className="list-content">
-                
-                <table>
-                    <tr>
-                        <th>
-                            <input type='checkbox'></input>
-                        </th>
-                        <th>
-                            번호
-                        </th>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>작성일</th>
-                        <th>조회수</th>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td><Link to="/view">상세페이지로 연결될 제목입력</Link></td>
-                      <td>작성자이름</td>
-                      <td>작성일 뿌리기</td>
-                      <td>조회수 뿌리기</td>
-                    </tr>
-                </table>
-              </div>
-            
-    
+              <ul className="list-content">
+                  {parsedData != null ? (
+                    parsedData.map((item, index) => 
+                    <li key={item.key}>
+                      {item.value}
+                    </li>
+                    )
+                  ) : (
+                    <li>등록된 게시글 없습니다.</li>
+                  )}
+              </ul>
     
               <div className='button-wrap'>
                 <button 

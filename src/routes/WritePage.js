@@ -1,48 +1,58 @@
 import './write-page.css';
 import { useState } from 'react';
+import {Link} from 'react-router-dom';
+
 
 function WritePage() {
-  const [title, setTitle] = useState('');
+  const storeageData = window.localStorage.getItem('contentArray');
+
+  var arr;
+  if(storeageData == null ) {
+    arr = []
+    console.log(arr);
+  } else {
+    arr = JSON.parse(storeageData);
+  }
+
+  //1. 글쓴것을 저장하는 useState
   const [content, setContent] = useState('');
-  const [dataArray, setDataArray] = useState([]);
-  const key = dataArray.length;
-
-  const getTitle = (event) => {
-    setTitle(event.target.value);
-    //console.log(title);
-  }
-  const getContent = (event) => {
-    setContent(event.target.value);
-  }
-
-  //object형태로 받아오기
-  const data = {
-    key: key,
-    title: title,
-    content: content
-  }
-
-  const getData = (event) => {
+  //2. 글쓴것을 배열로 저장할 useState
+  const [contentArray, setContentArray] = useState(arr);
+  const onChange = (event) => setContent(event.target.value);
+ 
+  const onSubmit = (event) => {
     event.preventDefault();
-    setDataArray([...dataArray, data]);
+
+    if(content === "") {
+      return;
+    } else {
+      //3. 글쓴것을 object화 하기   
+      // 얘는 앞에 함수랑 상관없음 가져오는 값 content를 object로 변환해서 array로 저장시키기 위한 변수일뿐임 
+      const dataKey = contentArray.length;
+      const contentsData = { 
+        value : content, 
+        key : dataKey 
+      };
+      
+      //노마드코딩이 알려줌-> 블로그
+      //4. 배열에 전배열과 같이 넣기
+      //이거는 object화한contentsData 
+      setContentArray(currentArray => [contentsData, ...currentArray]);
+    }
   }
+  //5. logalstorage에 저장하기
+  window.localStorage.setItem("contentArray", JSON.stringify(contentArray));
+
 
   return (
     <div className="write-page">
       <div className='sub-inner'>
         <h2 className='sub-title'>작성하기</h2>
         <form>
-          <input 
-            type="text"
-            placeholder="제목을 입력해주세요."
-            value={title}
-            onChange={getTitle}
-          >
-          </input>
           <textarea
             value={content}
             placeholder="내용을 입력해주세요."
-            onChange={getContent}
+            onChange={onChange}
           >            
           </textarea>
 
@@ -52,10 +62,13 @@ function WritePage() {
             className='button button-normal'
             >취소
             </button>
+            <Link to="/"
+            className='button button-normal'
+            >목록으로</Link>
             <button 
-            type='submit'
+            type='button'
             className='button button-ok'
-            onClick={getData}
+            onClick={onSubmit}
             >확인
             </button>
           </div>
