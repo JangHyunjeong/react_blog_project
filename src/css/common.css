@@ -21,6 +21,53 @@ body {
 
 
 
+
+
+/* list-page */
+.list-content {
+  border-top: 1px solid #ddd;
+  font-size: 14px;
+  color: #222;
+}
+.list-content > li {
+    display: grid;
+    grid-template-columns: 100px 1fr 100px;
+}
+.list-content > li.list-empty {
+    grid-template-columns: 1fr;
+
+}
+.list-content > li > div {
+    border-bottom: 1px solid #ddd;
+    padding: 20px 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.list-content > li.list-header > div {
+   
+}
+.list-content > li.list-body > div.subject {
+    text-align: left;
+    justify-content: flex-start;
+}
+
+.button-del {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 30px;
+    font-size: 14px;
+    background-color: #bbb;
+    color: #fff;
+    border: 0;
+}
+
+
+
+
 /* ==== form ==== */
 input {
     width: 100%;
