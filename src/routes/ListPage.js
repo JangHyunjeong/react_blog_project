@@ -4,9 +4,18 @@ import {Link} from 'react-router-dom';
 
 function ListPage() {
     const contentArray =  window.localStorage.getItem("contentArray");
-    
+
+    let arr;
+    if(contentArray == null) {
+      arr = [];
+    }else {
+      arr = JSON.parse(contentArray);
+    }
+   
+
+
     // 컴포넌트가 바로 업데이트 될 수있도록 useSate를 사용해, props 를 업데이트해준다.
-    const [parsedData, setParsedData] = useState(JSON.parse(contentArray));
+    let [parsedData, setParsedData] = useState(arr);
 
     // 삭제 function
     const actionDel = (e, key) => {
@@ -15,13 +24,14 @@ function ListPage() {
 
       // item.key = key인것을 제외하고 필터링 (새로운 배얼을 만듦)]
 
-     //결과적으로 수정해야하는 값을 수정해여야해.
-     //localStorage에 있는 값을 변환하고싶은거니까, 결과적으로 그값을 수정하고, 
-      window.localStorage.setItem("contentArray", JSON.stringify(parsedData.filter((item) => item.key !== key)));
+      //결과적으로 수정해야하는 값을 수정해여야해.
+      //localStorage에 있는 값을 변환하고싶은거니까, 결과적으로 그값을 수정하고, 
+      parsedData = parsedData.filter((item) => item.key !== key);
+
+      window.localStorage.setItem("contentArray", JSON.stringify(parsedData));      
 
       //데이터는 그 다음에 set해주면 돼. 먼저 set 하면 오류나!!!
       setParsedData(JSON.parse(window.localStorage.getItem("contentArray")));
-      
     }
       return (
         <div className="list-page">
@@ -34,11 +44,15 @@ function ListPage() {
                   <div>제목</div>
                   <div>관리</div>
                 </li>
-                  {parsedData != null ? (
+                  {parsedData.length !== 0 ? (
                     parsedData.map((item, index) => 
                     <li className="list-body" key={item.key}>
-                      <div>{item.key}</div>
-                      <div className="subject">{item.value}</div>
+                      <div>{parsedData.length - index}</div>
+                      <div className="subject">
+                        <Link to={'/view/'+item.key}>
+                          {item.value}
+                        </Link>
+                        </div>
                       <div>
                         <button 
                           type="button" 

@@ -1,12 +1,15 @@
-import './write-page.css';
+import '../css/write-page.css';
 import { useState } from 'react';
+//import {Link, Navigate, useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
 
 function WritePage() {
+  //const navigate = useNavigate();
+
   const storeageData = window.localStorage.getItem('contentArray');
 
-  var arr;
+  let arr;
   if(storeageData == null ) {
     arr = []
     console.log(arr);
@@ -28,7 +31,12 @@ function WritePage() {
     } else {
       //3. 글쓴것을 object화 하기   
       // 얘는 앞에 함수랑 상관없음 가져오는 값 content를 object로 변환해서 array로 저장시키기 위한 변수일뿐임 
-      const dataKey = contentArray.length;
+      let dataKey;
+      if( contentArray.length == 0 ) {
+        dataKey = 0;
+      } else {
+        dataKey = contentArray[0].key + 1;
+      }
       const contentsData = { 
         value : content, 
         key : dataKey 
@@ -38,6 +46,10 @@ function WritePage() {
       //4. 배열에 전배열과 같이 넣기
       //이거는 object화한contentsData 
       setContentArray(currentArray => [contentsData, ...currentArray]);
+
+      //5. 작성시, list page로 이동
+      //navigate('/');
+      window.location.href = '/';
     }
   }
   //5. logalstorage에 저장하기
