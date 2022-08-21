@@ -15,7 +15,7 @@ function App() {
        <Router>
            <Routes>
                <Route path="/" element={<ListPage />}></Route>
-               <Route path="/write" element={<WritePage />}></Route>
+               <Route path="/write/*" element={<WritePage />}></Route>
                <Route path="/view/:id" element={<ViewPage />}></Route>
            </Routes>
        </Router>

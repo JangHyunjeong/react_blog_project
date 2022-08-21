@@ -36,7 +36,7 @@ function ListPage() {
       return (
         <div className="list-page">
           <div className='sub-inner'>
-            <h2 className='sub-title'>리스트 페이지</h2>
+            <h2 className='sub-title'>List</h2>
             <form>
               <ul className="list-content">
                 <li className="list-header">
@@ -50,19 +50,26 @@ function ListPage() {
                       <div>{parsedData.length - index}</div>
                       <div className="subject">
                         <Link to={'/view/'+item.key}>
-                          {item.value}
+                          {item.title}
                         </Link>
                         </div>
                       <div>
-                        <button 
-                          type="button" 
-                          className="button-del"
-                          onClick={(e) =>     {actionDel(e, item.key)}
-                          }
-                        >
-                          {/* 01. 클릭한 애의 키값 받아오기 */}
-                          {/* 02. 키값이 지금숫자인 애를 배열에서 필터링*/}
-                          삭제</button>
+                        <div className='button-wrap-col'>
+                          <Link to={'/write/'+item.key} 
+                            type="button" 
+                            className="button-xs button-normal"
+                          >
+                            수정</Link>
+                          <button 
+                            type="button" 
+                            className="button-xs button-del"
+                            onClick={(e) => {actionDel(e, item.key)}
+                            }
+                          >
+                            {/* 01. 클릭한 애의 키값 받아오기 */}
+                            {/* 02. 키값이 지금숫자인 애를 배열에서 필터링*/}
+                            삭제</button>
+                        </div>
                       </div>
                     </li>
                     )
@@ -71,20 +78,10 @@ function ListPage() {
                   )}
               </ul>
     
-              <div className='button-wrap'>
-                <button 
-                type='button' 
-                className='button button-normal'
-                > 수정
-                </button>
-                <button 
-                type='submit'
-                className='button button-normal'
-                > 삭제
-                </button>
+              <div className='button-wrap-row'>
                 <Link 
                   to={`/write`}
-                  className='button button-ok'
+                  className='button button-m button-ok'
                 > 글쓰기
                 </Link>
               </div>
