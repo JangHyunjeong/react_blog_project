@@ -36,7 +36,7 @@ function ListPage() {
       return (
         <div className="list-page">
           <div className='sub-inner'>
-            <h2 className='sub-title'>List</h2>
+            <h2 className='sub-title'>List test</h2>
             <form>
               <ul className="list-content">
                 <li className="list-header">
