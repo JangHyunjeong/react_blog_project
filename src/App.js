@@ -12,7 +12,7 @@ import WritePage from './routes/WritePage';
 
 function App() {
       return (
-       <Router>
+        <Router basename={process.env.PUBLIC_URL}>
            <Routes>
                <Route path="/" element={<ListPage />}></Route>
                <Route path="/write/*" element={<WritePage />}></Route>
